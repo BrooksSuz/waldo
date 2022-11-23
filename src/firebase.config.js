@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage();
 const waldoRef = ref(storage, 'images/waldo.jpeg');
 
-getDownloadURL(waldoRef)
+export const loadWaldo = getDownloadURL(waldoRef)
   .then((url) => {
     const waldoImage = document.querySelector('.waldo-image');
     waldoImage.setAttribute('src', url);

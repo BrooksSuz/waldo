@@ -1,9 +1,14 @@
 import "./styles/App.css";
+import "./firebase.config";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
     <div className="container">
-      <img className="waldo-image" alt='Waldo' />
+      <Navbar />
+      <div className="image-container">
+        <img className="waldo-image" alt='Waldo' />
+      </div>
     </div>
   );
 }

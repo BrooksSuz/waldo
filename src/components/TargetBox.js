@@ -4,6 +4,6 @@ const TargetBox = () => {
 
     </div>
   );
-}
+};
 
 export default TargetBox;

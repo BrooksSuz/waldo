@@ -4,3 +4,9 @@
   min-height: 100vh;
   background-color: black;
 }
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}

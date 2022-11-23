@@ -1,0 +1,22 @@
+nav {
+  max-height: 10vh;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+nav > * {
+  margin: 0;
+}
+
+ul {
+  display: inherit;
+  justify-content: space-around;
+}
+
+h1 {
+  color: white;
+}
