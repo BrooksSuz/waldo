@@ -1,6 +1,7 @@
 import "./styles/App.css";
-import "./firebase.config";
+import "./firebase-config";
 import Navbar from "./components/Navbar";
+import TargetBox from "./components/TargetBox";
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <div className="image-container">
         <img className="waldo-image" alt='Waldo' />
       </div>
+      <TargetBox />
     </div>
   );
 }

@@ -4,6 +4,7 @@ import "../styles/Navbar.css";
 const Navbar = () => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(null);
+  const [hours, setHours] = useState(null);
 
   useEffect(() => {
     const interval = setInterval(() => setSeconds(seconds + 1), 1000);
@@ -12,11 +13,16 @@ const Navbar = () => {
         setSeconds(0);
         setMinutes(minutes + 1);
         clearInterval(interval);
+      } else if (minutes === 59) {
+        setSeconds(0);
+        setMinutes(0);
+        setHours(hours + 1);
+        clearInterval(interval);
       } else {
         clearInterval(interval);
       }
     };
-  }, [seconds, minutes]);
+  }, [seconds, minutes, hours]);
 
   return (
     <nav>
