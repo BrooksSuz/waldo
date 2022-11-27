@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import "../styles/Navbar.css";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [seconds, setSeconds] = useState(0);
@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav>
       <ul>
         <li><h1>Restart</h1></li>
-        <li><h1>{minutes} : {seconds}</h1></li>
+        <li><h1>{hours} | {minutes} | {seconds}</h1></li>
       </ul>
     </nav>
   );
