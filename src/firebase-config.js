@@ -12,12 +12,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+const db = getFirestore(app);
 const storage = getStorage();
 const waldoRef = ref(storage, 'images/waldo.jpeg');
-
-export const loadWaldo = getDownloadURL(waldoRef)
+const loadWaldo = getDownloadURL(waldoRef)
   .then((url) => {
     const waldoImage = document.querySelector('.waldo-image');
     waldoImage.setAttribute('src', url);
   });
+
+export { db, loadWaldo };

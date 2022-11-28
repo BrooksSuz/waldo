@@ -4,7 +4,7 @@ import WaldoBoard from "./components/WaldoBoard";
 
 const App = () => {
   return (
-    <div className="app-container">
+    <div className="app">
       <Navbar />
       <WaldoBoard />
     </div>
