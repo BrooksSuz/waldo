@@ -1,16 +1,12 @@
 import { useState } from "react";
 import DropdownMenu from "./DropdownMenu";
 
-const WaldoBoard = () => {
+const WaldoBoard = (props) => {
+  const { setFound } = props;
   const [userGuess, setUserGuess] = useState(null);
   const [top, setTop] = useState(null);
   const [left, setleft] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [found, setFound] = useState({
-    mineGuy: false,
-    polarBear: false,
-    tinyCastle: false
-  });
 
   const handleClick = (e) => {
     setUserGuess([e.pageX, e.pageY]);
@@ -27,7 +23,7 @@ const WaldoBoard = () => {
         className="waldo-image"
         alt='Waldo' 
       />
-      { showDropdown ? <DropdownMenu userGuess={userGuess} top={top} left={left} /> : null }
+      { showDropdown ? <DropdownMenu userGuess={userGuess} top={top} left={left} setFound={setFound} /> : null }
     </div>
   );
 };

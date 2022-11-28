@@ -2,7 +2,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase-config";
 
 const DropdownMenu = (props) => {
-  const { userGuess, top, left } = props;
+  const { userGuess, top, left, setFound } = props;
 
   const locationsCollectionRef = collection(db, "waldo-locations");
 
@@ -26,28 +26,55 @@ const DropdownMenu = (props) => {
     return response[2];
   };
 
-  const checkGuess = async () => {
+  const checkMineGuy = async () => {
     const mineGuy = await getMineGuy();
-    const polarBear = await getPolarBear();
-    const tinyCastle = await getTinyCastle();
 
     if ((userGuess[0] >= mineGuy.X[0]
-      && userGuess[0] <= mineGuy.X[1])
-      && (userGuess[1] >= mineGuy.Y[0]
-      && userGuess[1] <= mineGuy.Y[1])) {
+    && userGuess[0] <= mineGuy.X[1])
+    && (userGuess[1] >= mineGuy.Y[0]
+    && userGuess[1] <= mineGuy.Y[1])) {
       console.log('You found the Mine Guy!');
-    } else if ((userGuess[0] >= polarBear.X[0]
-      && userGuess[0] <= polarBear.X[1])
-      && (userGuess[1] >= polarBear.Y[0]
-      && userGuess[1] <= polarBear.Y[1])) {
-      console.log('You found the Polar Bear!');
-    } else if ((userGuess[0] >= tinyCastle.X[0]
-      && userGuess[0] <= tinyCastle.X[1])
-      && (userGuess[1] >= tinyCastle.Y[0]
-      && userGuess[1] <= tinyCastle.Y[1])) {
-      console.log('You found the Tiny Castle!');
+      setFound(prevState => {
+        let tempFound = Object.assign({}, prevState);
+        tempFound.mineGuy = true;
+        return tempFound;
+      });
     } else {
-      console.log('You no find anything :(');
+      console.log('Incorrect :(');
+    }
+  };
+
+  const checkPolarBear = async () => {
+    const polarBear = await getPolarBear();
+
+    if ((userGuess[0] >= polarBear.X[0]
+    && userGuess[0] <= polarBear.X[1])
+    && (userGuess[1] >= polarBear.Y[0]
+    && userGuess[1] <= polarBear.Y[1])) {
+      setFound(prevState => {
+        let tempFound = Object.assign({}, prevState);
+        tempFound.polarBear = true;
+        return tempFound;
+      });
+    } else {
+      console.log('Incorrect :(');
+    }
+  };
+
+  const checkTinyCastle = async () => {
+    const tinyCastle = await getTinyCastle();
+
+    if ((userGuess[0] >= tinyCastle.X[0]
+    && userGuess[0] <= tinyCastle.X[1])
+    && (userGuess[1] >= tinyCastle.Y[0]
+    && userGuess[1] <= tinyCastle.Y[1])) {
+      setFound(prevState => {
+        let tempFound = Object.assign({}, prevState);
+        tempFound.tinyCastle = true;
+        return tempFound;
+      });
+    } else {
+      console.log('Incorrect :(');
     }
   };
 
@@ -61,9 +88,9 @@ const DropdownMenu = (props) => {
             }}
       className="dropdown-menu"
     >
-      <button onClick={checkGuess}>Mine Guy</button>
-      <button onClick={checkGuess}>Polar Bear</button>
-      <button onClick={checkGuess}>Tiny Castle</button>
+      <button onClick={checkMineGuy}>Mine Guy</button>
+      <button onClick={checkPolarBear}>Polar Bear</button>
+      <button onClick={checkTinyCastle}>Tiny Castle</button>
     </span>
   );
 };
