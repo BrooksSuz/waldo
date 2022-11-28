@@ -5,9 +5,14 @@ import { collection, getDocs } from "firebase/firestore";
 import DropdownMenu from "./DropdownMenu";
 
 const WaldoBoard = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
   const [top, setTop] = useState(null);
   const [left, setleft] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [found, setFound] = useState({
+    mineGuy: false,
+    polarBear: false,
+    tinyCastle: false
+  });
 
   const locationsCollectionRef = collection(db, "waldo-locations");
 
@@ -62,7 +67,6 @@ const WaldoBoard = () => {
     setleft(e.pageX);
     setShowDropdown(!showDropdown);
     checkGuess(userGuess);
-    console.log(`${top} ${left}`)
   };
 
   return (
