@@ -6,37 +6,42 @@ const Navbar = (props) => {
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(null);
   const [hours, setHours] = useState(null);
-
+  let isRunning = true;
+  
   const countFound = () => {
-    const arrFound = Object.values(Object.assign({}, found));
+    const arrFound = Object.values(found);
     const temp = [];
     
     arrFound.forEach((val) => {
       if (val) {
-        temp.push(val)
+        temp.push(val);
       }
     });
     
+    if (temp.length === 3) {
+      isRunning = false;
+    }
+
     return (3 - temp.length);
   };
 
   useEffect(() => {
-    const interval = setInterval(() => setSeconds(seconds + 1), 1000);
-    return () => {
-      if (seconds === 59) {
-        setSeconds(0);
-        setMinutes(minutes + 1);
-        clearInterval(interval);
-      } else if (minutes === 59) {
-        setSeconds(0);
-        setMinutes(0);
-        setHours(hours + 1);
-        clearInterval(interval);
-      } else {
-        clearInterval(interval);
-      }
-    };
-  }, [seconds, minutes, hours]);
+    let intervalID;
+    if (isRunning) {
+      intervalID = setInterval(() => {
+        setSeconds(seconds + 1);
+        if (seconds === 59) {
+          setSeconds(0);
+          setMinutes(minutes + 1);
+        } else if (minutes === 59) {
+          setSeconds(0);
+          setMinutes(0);
+          setHours(hours + 1);
+        }
+      }, 1000);
+    }
+      return () => clearInterval(intervalID);
+  }, [seconds, minutes, hours, isRunning]);
 
   useEffect(() => {
     countFound();
