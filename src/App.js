@@ -12,7 +12,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <Navbar />
+      <Navbar found={found} />
       <WaldoBoard setFound={setFound} />
     </div>
   );

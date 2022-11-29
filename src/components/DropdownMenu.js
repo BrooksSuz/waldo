@@ -33,14 +33,11 @@ const DropdownMenu = (props) => {
     && userGuess[0] <= mineGuy.X[1])
     && (userGuess[1] >= mineGuy.Y[0]
     && userGuess[1] <= mineGuy.Y[1])) {
-      console.log('You found the Mine Guy!');
       setFound(prevState => {
         let tempFound = Object.assign({}, prevState);
         tempFound.mineGuy = true;
         return tempFound;
       });
-    } else {
-      console.log('Incorrect :(');
     }
   };
 
@@ -56,8 +53,6 @@ const DropdownMenu = (props) => {
         tempFound.polarBear = true;
         return tempFound;
       });
-    } else {
-      console.log('Incorrect :(');
     }
   };
 
@@ -73,18 +68,17 @@ const DropdownMenu = (props) => {
         tempFound.tinyCastle = true;
         return tempFound;
       });
-    } else {
-      console.log('Incorrect :(');
     }
   };
 
   return (
     <span
-      style={{ display: "flex",
-               flexDirection: "column",
-               position: "absolute",
-               top: `${top + 5}px`,
-               left: `${left + 5}px`
+      style={{
+              display: "flex",
+              flexDirection: "column",
+              position: "absolute",
+              top: `${top + 5}px`,
+              left: `${left + 5}px`
             }}
       className="dropdown-menu"
     >
