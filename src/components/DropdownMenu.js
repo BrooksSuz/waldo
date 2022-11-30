@@ -12,18 +12,18 @@ const DropdownMenu = (props) => {
   };
 
   const getMineGuy = async () => {
-    const response = await getWaldos();
-    return response[0];
+    const result = await getWaldos();
+    return result[0];
   };
 
   const getPolarBear = async () => {
-    const response = await getWaldos();
-    return response[1];
+    const result = await getWaldos();
+    return result[1];
   };
 
   const getTinyCastle = async () => {
-    const response = await getWaldos();
-    return response[2];
+    const result = await getWaldos();
+    return result[2];
   };
 
   const checkMineGuy = async () => {

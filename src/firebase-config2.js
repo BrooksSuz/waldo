@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDownloadURL, getStorage, ref } from "firebase/storage";
-import { getFirestore } from "@firebase/firestore";
+import { getDatabase, ref, set} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC25JZw3CSZ1Jg9eRNItmBBP81nl3Uo6iE",
@@ -13,13 +12,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const storage = getStorage();
-const waldoRef = ref(storage, 'images/waldo.jpeg');
-const loadWaldo = getDownloadURL(waldoRef)
-  .then((url) => {
-    const waldoImage = document.querySelector('.waldo-image');
-    waldoImage.setAttribute('src', url);
-  });
 
-export { db, loadWaldo };
+const writeUserData = (user, score) => {
+  const db = getDatabase(app);
+  const reference = ref(db, 'high-scores/' + user);
+
+  set(reference, {
+    score: score
+  });
+};
+
+export default writeUserData;

@@ -23,7 +23,16 @@ const WaldoBoard = (props) => {
         className="waldo-image"
         alt='Waldo' 
       />
-      { showDropdown ? <DropdownMenu userGuess={userGuess} top={top} left={left} setFound={setFound} /> : null }
+      {
+        showDropdown
+        ? <DropdownMenu 
+            userGuess={userGuess}
+            top={top}
+            left={left}
+            setFound={setFound}
+          />
+        : null
+      }
     </div>
   );
 };
