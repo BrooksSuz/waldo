@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set} from "firebase/database";
+import { getDatabase, onValue, ref, set} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyC25JZw3CSZ1Jg9eRNItmBBP81nl3Uo6iE",
@@ -12,9 +12,9 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 const writeUserData = (user, score) => {
-  const db = getDatabase(app);
   const reference = ref(db, 'high-scores/' + user);
 
   set(reference, {
@@ -22,4 +22,13 @@ const writeUserData = (user, score) => {
   });
 };
 
-export default writeUserData;
+const readUserData = (user) => {
+  const scoreRef = ref(db, 'high-scores/' + user + '/score');
+
+  onValue(scoreRef, (snapshot) => {
+    const data = snapshot.val();
+    return data;
+  });
+};
+
+export { writeUserData, readUserData };

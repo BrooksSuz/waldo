@@ -12,6 +12,10 @@ nav > * {
   margin: 0;
 }
 
+nav div {
+  align-self: center;
+}
+
 ul {
   display: inherit;
   justify-content: space-around;

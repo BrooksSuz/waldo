@@ -1,13 +1,15 @@
 import "../styles/Navbar.css";
 import { useState, useEffect, useRef } from "react";
-import writeUserData from "../firebase-config2";
+import { writeUserData } from "../firebase-config2";
+import HighscoreTable from "./HighscoreTable";
 
 const Navbar = (props) => {
-  const { found, setShowHighscoreTable } = props;
+  const { found } = props;
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(null);
   const [hours, setHours] = useState(null);
   const inputName = useRef();
+  let showHighscoreTable = false;
   let isRunning = true;
 
   const writeScore = () => {
@@ -27,6 +29,7 @@ const Navbar = (props) => {
     if (temp.length === 3) {
       isRunning = false;
       writeScore();
+      showHighscoreTable = true;
     }
 
     return (3 - temp.length);
@@ -62,6 +65,7 @@ const Navbar = (props) => {
         <li><label style={{ color: "white" }} htmlFor="name">Name:<input id="name" name="name" ref={inputName}></input></label></li>
         <li><h1>{hours} | {minutes} | {seconds}</h1></li>
       </ul>
+      { showHighscoreTable ? <HighscoreTable /> : null }
     </nav>
   );
 };
